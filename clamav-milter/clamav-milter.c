@@ -175,11 +175,11 @@ int main(int argc, char **argv)
 
     pt = optget(opts, "AddHeader")->strarg;
     if (strcasecmp(pt, "No")) {
-        char myname[200];
+        char myname[255];
 
         if (((opt = optget(opts, "ReportHostname"))->enabled &&
              strncpy(myname, opt->strarg, sizeof(myname) - 1)) ||
-            !gethostname(myname, sizeof(myname))) {
+            !gethostname(myname, sizeof(myname) - 1)) {
 
             myname[sizeof(myname) - 1] = '\0';
             snprintf(xvirushdr, sizeof(xvirushdr), "clamav-milter %s at %s",
